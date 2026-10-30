@@ -1,2 +1,2 @@
 # SableGuard
-A mod about making safe sable for everyone
+A mod about making sable safe for everyone
