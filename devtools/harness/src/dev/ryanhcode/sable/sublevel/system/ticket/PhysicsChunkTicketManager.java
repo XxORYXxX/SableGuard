@@ -1,0 +1,1 @@
+package dev.ryanhcode.sable.sublevel.system.ticket; public class PhysicsChunkTicketManager { public static final java.util.Set<Long> TICKING=new java.util.HashSet<>(); public static boolean isChunkLoadedEnough(net.minecraft.server.level.ServerLevel l, int x, int z){return TICKING.contains(net.minecraft.world.level.ChunkPos.asLong(x,z));} }

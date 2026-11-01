@@ -1,0 +1,3 @@
+package net.minecraft.nbt; public class CompoundTag implements Tag { public final java.util.HashMap<String,Object> m=new java.util.HashMap<>();
+ public boolean contains(String k){return m.containsKey(k);} public boolean contains(String k,int t){return m.get(k) instanceof CompoundTag;} public CompoundTag getCompound(String k){return (CompoundTag)m.get(k);} public double getDouble(String k){return (Double)m.getOrDefault(k,0.0);} public void putDouble(String k,double d){m.put(k,d);}
+ public String getString(String k){return (String)m.get(k);} public void remove(String k){m.remove(k);} public Tag put(String k, Tag t){m.put(k,t); return null;} }

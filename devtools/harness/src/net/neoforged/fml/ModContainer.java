@@ -1,0 +1,1 @@
+package net.neoforged.fml; public abstract class ModContainer { public void registerConfig(net.neoforged.fml.config.ModConfig.Type t, net.neoforged.fml.config.IConfigSpec s){} public net.neoforged.neoforgespi.language.IModInfo getModInfo(){return null;} }

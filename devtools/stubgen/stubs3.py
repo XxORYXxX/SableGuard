@@ -1,0 +1,76 @@
+import os,sys
+ROOT=sys.argv[1]
+S={}
+def c(fqn, body): S[fqn]=body
+SB='dev.ryanhcode.sable.'
+BP='net.minecraft.core.BlockPos'; BS='net.minecraft.world.level.block.state.BlockState'; LV='net.minecraft.world.level.Level'; SL='net.minecraft.server.level.ServerLevel'
+V3='net.minecraft.world.phys.Vec3'
+c(SB+'Sable','public final class Sable { public static final ActiveSableCompanion HELPER=null; public static final org.slf4j.Logger LOGGER=null; }')
+c(SB+'ActiveSableCompanion','public class ActiveSableCompanion { public dev.ryanhcode.sable.sublevel.SubLevel getContaining(%s l, net.minecraft.core.Vec3i p){return null;} public dev.ryanhcode.sable.sublevel.SubLevel getContaining(%s l, net.minecraft.core.Position p){return null;} public %s projectOutOfSubLevel(%s l, %s p){return null;} public %s projectOutOfSubLevel(%s l, net.minecraft.core.Position p){return null;} }'%(LV,LV,V3,LV,V3,V3,LV))
+c(SB+'companion.math.Pose3d','public class Pose3d { public org.joml.Vector3d position(){return null;} public org.joml.Vector3d rotationPoint(){return null;} public %s transformNormalInverse(%s v){return null;} public %s transformPosition(%s v){return null;} public Pose3d set(Pose3d o){return this;} }'%(V3,V3,V3,V3))
+c(SB+'sublevel.SubLevel','public abstract class SubLevel { public boolean isRemoved(){return false;} public java.util.UUID getUniqueId(){return null;} public dev.ryanhcode.sable.companion.math.BoundingBox3dc boundingBox(){return null;} public dev.ryanhcode.sable.companion.math.Pose3d logicalPose(){return null;} public %s getLevel(){return null;} public String getName(){return null;} public dev.ryanhcode.sable.sublevel.plot.LevelPlot getPlot(){return null;} }'%LV)
+c(SB+'sublevel.ServerSubLevel','public class ServerSubLevel extends SubLevel implements dev.ryanhcode.sable.api.physics.PhysicsPipelineBody { public final org.joml.Vector3d latestLinearVelocity=null; public final org.joml.Vector3d latestAngularVelocity=null; public dev.ryanhcode.sable.sublevel.storage.holding.GlobalSavedSubLevelPointer getLastSerializationPointer(){return null;} public void setLastSerializationPointer(dev.ryanhcode.sable.sublevel.storage.holding.GlobalSavedSubLevelPointer p){} public %s getLevel(){return null;} public dev.ryanhcode.sable.sublevel.plot.ServerLevelPlot getPlot(){return null;} public boolean isRemoved(){return false;} }'%SL)
+c(SB+'sublevel.plot.LevelPlot','public abstract class LevelPlot { public net.minecraft.world.level.ChunkPos plotPos; }')
+c(SB+'sublevel.plot.ServerLevelPlot','public class ServerLevelPlot extends LevelPlot { public net.minecraft.world.level.lighting.LevelLightEngine getLightEngine(){return null;} }')
+c(SB+'sublevel.plot.PlotChunkHolder','public class PlotChunkHolder {}')
+c(SB+'api.sublevel.SubLevelContainer','public abstract class SubLevelContainer { public static ServerSubLevelContainer getContainer(%s l){return null;} public dev.ryanhcode.sable.sublevel.SubLevel getSubLevel(java.util.UUID u){return null;} public java.util.List<? extends dev.ryanhcode.sable.sublevel.SubLevel> getAllSubLevels(){return null;} public dev.ryanhcode.sable.sublevel.plot.PlotChunkHolder getChunkHolder(net.minecraft.world.level.ChunkPos p){return null;} public boolean inBounds(net.minecraft.world.level.ChunkPos p){return false;} public boolean inBounds(%s p){return false;} public boolean inBounds(int x,int z){return false;} public void removeSubLevel(dev.ryanhcode.sable.sublevel.SubLevel s, dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason r){} }'%(SL,BP))
+c(SB+'api.sublevel.ServerSubLevelContainer','public class ServerSubLevelContainer extends SubLevelContainer { public dev.ryanhcode.sable.sublevel.storage.holding.SubLevelHoldingChunkMap getHoldingChunkMap(){return null;} public java.util.List<dev.ryanhcode.sable.sublevel.ServerSubLevel> getAllSubLevels(){return null;} public %s getLevel(){return null;} }'%SL)
+c(SB+'sublevel.storage.SubLevelRemovalReason','public enum SubLevelRemovalReason { UNLOADED, REMOVED }')
+H='dev.ryanhcode.sable.sublevel.storage.'
+c(SB+'sublevel.storage.holding.SubLevelHoldingChunkMap','public class SubLevelHoldingChunkMap { public void saveAll(){} public %sserialization.SubLevelStorage getStorage(){return null;} public void loadHoldingSubLevel(%sHoldingSubLevel h){} public %sHoldingSubLevel getHoldingSubLevel(java.util.UUID u){return null;} public void queueDeletion(dev.ryanhcode.sable.sublevel.ServerSubLevel s){} public void processChanges(){} }'%(H,H,H))
+c(SB+'sublevel.storage.holding.SubLevelHoldingChunk','public class SubLevelHoldingChunk { public java.util.List<SavedSubLevelPointer> getSubLevelPointers(){return null;} public boolean isEmpty(){return false;} public java.util.Collection<%sHoldingSubLevel> getHoldingSubLevels(){return null;} }'%H)
+c(SB+'sublevel.storage.serialization.SubLevelStorage','public class SubLevelStorage implements AutoCloseable { public SubLevelStorage(java.nio.file.Path p){} public %sholding.SubLevelHoldingChunk attemptLoadHoldingChunk(net.minecraft.world.level.ChunkPos c){return null;} public SubLevelData attemptLoadSubLevel(net.minecraft.world.level.ChunkPos c, %sholding.SavedSubLevelPointer p){return null;} public void attemptSaveHoldingChunk(net.minecraft.world.level.ChunkPos c, %sholding.SubLevelHoldingChunk h){} public void attemptRemoveHoldingChunk(net.minecraft.world.level.ChunkPos c){} public %sholding.GlobalSavedSubLevelPointer attemptSaveSubLevel(net.minecraft.world.level.ChunkPos c, SubLevelData d){return null;} public void attemptSaveSubLevel(%sholding.GlobalSavedSubLevelPointer p, SubLevelData d){} public void flush() throws java.io.IOException {} public java.nio.file.Path getFolder(){return null;} public void close() throws java.io.IOException {} }'%(H,H,H,H,H))
+c(SB+'sublevel.storage.serialization.SubLevelSerializer','public final class SubLevelSerializer { public static SubLevelData fromData(net.minecraft.nbt.CompoundTag t){return null;} public static dev.ryanhcode.sable.sublevel.ServerSubLevel fullyLoad(%s l, SubLevelData d){return null;} public static SubLevelData toData(dev.ryanhcode.sable.sublevel.ServerSubLevel s, java.util.List<java.util.UUID> deps){return null;} }'%SL)
+c(SB+'sublevel.storage.region.SubLevelStorageFile','public class SubLevelStorageFile implements AutoCloseable { public static boolean COMPRESS_DATA=true; public static final String FILE_EXTENSION=".slvls"; public net.minecraft.nbt.CompoundTag read(int i) throws java.io.IOException {return null;} public void write(int i, net.minecraft.nbt.CompoundTag t) throws java.io.IOException {} public void flush() throws java.io.IOException {} public void close() throws java.io.IOException {} }')
+c(SB+'sublevel.storage.region.SubLevelRegionFile','public class SubLevelRegionFile { public static final String FILE_EXTENSION=".slvlr"; public static int SIDE_LENGTH=32; public static int LOG_SIDE_LENGTH=5; }')
+c(SB+'sublevel.system.SubLevelPhysicsSystem','public class SubLevelPhysicsSystem { public dev.ryanhcode.sable.api.physics.PhysicsPipeline getPipeline(){return null;} public void tick(double d){} public void updatePose(dev.ryanhcode.sable.sublevel.ServerSubLevel s){} }')
+c(SB+'sublevel.system.ticket.PhysicsChunkTicket','public final class PhysicsChunkTicket { public PhysicsChunkTicket(net.minecraft.core.SectionPos p, long t, java.util.Collection<dev.ryanhcode.sable.sublevel.SubLevel> r){} }')
+c(SB+'sublevel.system.ticket.PhysicsChunkTicketManager','public class PhysicsChunkTicketManager { public void update(%s l, dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer c, dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem s, dev.ryanhcode.sable.api.physics.PhysicsPipeline p, double d){} }'%SL)
+c(SB+'api.physics.constraint.PhysicsConstraintHandle','public interface PhysicsConstraintHandle {}')
+c(SB+'api.physics.constraint.PhysicsConstraintConfiguration','public interface PhysicsConstraintConfiguration<T extends PhysicsConstraintHandle> {}')
+c(SB+'api.physics.handle.RigidBodyHandle','public class RigidBodyHandle { public org.joml.Vector3dc getLinearVelocity(){return null;} public org.joml.Vector3d getLinearVelocity(org.joml.Vector3d d){return null;} }')
+c(SB+'api.physics.PhysicsPipelineBody','public interface PhysicsPipelineBody { default boolean isRemoved(){return false;} }')
+c(SB+'api.physics.PhysicsPipeline','public interface PhysicsPipeline { org.joml.Vector3d getLinearVelocity(PhysicsPipelineBody b, org.joml.Vector3d d); org.joml.Vector3d getAngularVelocity(PhysicsPipelineBody b, org.joml.Vector3d d); }')
+c(SB+'physics.impl.rapier.Rapier3D','public final class Rapier3D { public static int getID(dev.ryanhcode.sable.api.physics.PhysicsPipelineBody b){return 0;} }')
+c(SB+'physics.impl.rapier.RapierPhysicsPipeline','public class RapierPhysicsPipeline {}')
+c(SB+'api.block.BlockSubLevelLiftProvider','public interface BlockSubLevelLiftProvider { net.minecraft.core.Direction sable$getNormal(%s s); }'%BS)
+c(SB+'network.udp.SableUDPPacketType','public enum SableUDPPacketType { A; public static final SableUDPPacketType[] VALUES=values(); }')
+c(SB+'network.udp.SableUDPPacketDecoder','public class SableUDPPacketDecoder {}')
+c(SB+'util.LevelAccelerator','public class LevelAccelerator {}')
+c(SB+'util.SubLevelInclusiveLevelEntityGetter','public class SubLevelInclusiveLevelEntityGetter<T> {}')
+c(SB+'api.SubLevelAssemblyHelper','public class SubLevelAssemblyHelper { public static void moveBlocks(%s l, AssemblyTransform t, Iterable<%s> b){} public static class AssemblyTransform { public %s apply(%s p){return null;} } }'%(SL,BP,BP,BP))
+# --- create
+CR='com.simibubi.create.'
+c(CR+'content.trains.entity.Carriage','public class Carriage { public void manageEntities(%s l){} public void updateContraptionAnchors(){} public class DimensionalCarriageEntity { public void updatePassengerLoadout(){} } }'%LV)
+c(CR+'content.trains.entity.Train','public class Train { public java.util.UUID id; public void detachFromTracks(){} public void forEachTravellingPoint(java.util.function.Consumer<TravellingPoint> c){} }')
+c(CR+'content.trains.entity.TravellingPoint','public class TravellingPoint { public com.simibubi.create.content.trains.graph.TrackEdge edge; }')
+c(CR+'content.trains.graph.TrackEdge','public class TrackEdge {}')
+c(CR+'content.trains.graph.TrackNode','public class TrackNode {}')
+c(CR+'content.trains.graph.TrackGraph','public class TrackGraph { public java.util.Map<TrackNode,TrackEdge> getConnectionsFrom(TrackNode n){return null;} }')
+c(CR+'content.logistics.packagePort.frogport.FrogportBlockEntity','public class FrogportBlockEntity { public boolean tryPullingFrom(net.neoforged.neoforge.items.IItemHandler h){return false;} }')
+c(CR+'foundation.blockEntity.behaviour.ValueBoxTransform','public abstract class ValueBoxTransform { public static abstract class Sided extends ValueBoxTransform { protected net.minecraft.core.Direction direction; public Sided fromSide(net.minecraft.core.Direction d){return this;} protected boolean isSideActive(%s s, net.minecraft.core.Direction d){return true;} } }'%BS)
+# --- simulated / aeronautics
+c('dev.eriksonn.aeronautics.content.blocks.hot_air.steam_vent.SteamVentBlockEntity','public class SteamVentBlockEntity { public static class SteamVentValueBoxTransform extends com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform.Sided { } }')
+SIM='dev.simulated_team.simulated.'
+c(SIM+'util.SimAssemblyHelper','public class SimAssemblyHelper {}')
+c(SIM+'util.assembly.SimAssemblyContraption','public class SimAssemblyContraption { public java.util.Collection<%s> getBlocks(){return null;} }'%BP)
+c(SIM+'service.SimAssemblyService','public interface SimAssemblyService { SimAssemblyService INSTANCE=null; boolean canStickTo(%s a, %s b); }'%(BS,BS))
+c(SIM+'content.blocks.swivel_bearing.SwivelBearingBlock','public class SwivelBearingBlock extends net.minecraft.world.level.block.Block {}')
+c(SIM+'content.blocks.redstone.linked_typewriter.LinkedTypewriterBlock','public class LinkedTypewriterBlock extends net.minecraft.world.level.block.Block {}')
+# --- scguns + framework (shapes per SableCat usage)
+SC='top.ribs.scguns.'
+c(SC+'common.Turret','public class Turret { public Display getDisplay(){return null;} public Targeting getTargeting(){return null;} public static class Display { public double getMuzzleLength(){return 0;} public double getMuzzleOffsetY(){return 0;} } public static class Targeting { public float getMinPitch(){return 0;} public float getMaxPitch(){return 0;} public float getRotationSpeed(){return 0;} public double getMinFiringDistance(){return 0;} } }')
+c(SC+'blockentity.TurretBlockEntity','public class TurretBlockEntity extends net.minecraft.world.level.block.entity.BlockEntity { public TurretBlockEntity(){super(null,null,null);} public float getYaw(){return 0;} public float getPitch(){return 0;} public void applyRemoteVisualState(float a,float b,float c){} }')
+c(SC+'blockentity.EnemyTurretBlockEntity','public class EnemyTurretBlockEntity extends net.minecraft.world.level.block.entity.BlockEntity { public EnemyTurretBlockEntity(){super(null,null,null);} }')
+c(SC+'blockentity.ShockCoilBlockEntity','public class ShockCoilBlockEntity extends net.minecraft.world.level.block.entity.BlockEntity { public ShockCoilBlockEntity(){super(null,null,null);} }')
+c(SC+'config.ShockCoilConfig','public class ShockCoilConfig { public static double getZapRange(){return 0;} }')
+c(SC+'network.message.S2CMessageTurretVisualSync','public class S2CMessageTurretVisualSync { public S2CMessageTurretVisualSync(%s p, float y, float pi, float r){} }'%BP)
+c(SC+'network.PacketHandler','public class PacketHandler { public static com.mrcrayfish.framework.api.network.FrameworkNetwork getPlayChannel(){return null;} }')
+c('com.mrcrayfish.framework.api.network.FrameworkNetwork','public interface FrameworkNetwork { void sendToTrackingChunk(java.util.function.Supplier<net.minecraft.world.level.chunk.LevelChunk> s, Object m); }')
+c('com.mrcrayfish.framework.api.network.MessageContext','public abstract class MessageContext { public abstract void execute(Runnable r); public abstract void setHandled(boolean b); }')
+for fqn,body in S.items():
+    pkg,name=fqn.rsplit('.',1)
+    p=os.path.join(ROOT,*pkg.split('.'),name+'.java')
+    os.makedirs(os.path.dirname(p),exist_ok=True)
+    open(p,'w').write('package %s;\n%s\n'%(pkg,body))
+print(len(S))

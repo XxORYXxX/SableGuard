@@ -1,0 +1,1 @@
+package net.minecraft.network.chat; public class Style { public static final Style EMPTY=null; public Style withColor(net.minecraft.ChatFormatting f){return this;} public Style withUnderlined(Boolean b){return this;} public Style withClickEvent(ClickEvent e){return this;} public Style withHoverEvent(HoverEvent e){return this;} }

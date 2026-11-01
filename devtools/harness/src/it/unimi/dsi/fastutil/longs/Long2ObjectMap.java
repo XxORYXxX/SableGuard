@@ -1,0 +1,1 @@
+package it.unimi.dsi.fastutil.longs; public interface Long2ObjectMap<V> { V get(long k); boolean containsKey(long k); it.unimi.dsi.fastutil.objects.ObjectCollection<V> values(); boolean isEmpty(); int size(); }

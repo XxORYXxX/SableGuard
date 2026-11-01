@@ -1,0 +1,1 @@
+package net.minecraft.network.chat; public class MutableComponent implements Component { public MutableComponent withStyle(net.minecraft.ChatFormatting... f){return this;} public MutableComponent withStyle(Style s){return this;} public MutableComponent append(Component c){return this;} }

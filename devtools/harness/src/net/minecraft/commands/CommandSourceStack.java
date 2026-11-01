@@ -1,0 +1,1 @@
+package net.minecraft.commands; public class CommandSourceStack { public boolean hasPermission(int l){return true;} public void sendSuccess(java.util.function.Supplier<net.minecraft.network.chat.Component> s, boolean b){} public void sendFailure(net.minecraft.network.chat.Component c){} public net.minecraft.server.level.ServerLevel getLevel(){return null;} }

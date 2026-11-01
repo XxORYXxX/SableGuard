@@ -1,0 +1,1 @@
+package net.neoforged.fml.loading; public class LoadingModList { public static LoadingModList get(){return null;} public java.util.List<net.neoforged.fml.loading.moddiscovery.ModInfo> getMods(){return null;} }

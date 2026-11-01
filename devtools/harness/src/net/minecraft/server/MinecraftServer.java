@@ -1,0 +1,1 @@
+package net.minecraft.server; public class MinecraftServer { public net.minecraft.server.players.PlayerList getPlayerList(){return new net.minecraft.server.players.PlayerList();} public java.nio.file.Path getWorldPath(net.minecraft.world.level.storage.LevelResource r){return null;} }

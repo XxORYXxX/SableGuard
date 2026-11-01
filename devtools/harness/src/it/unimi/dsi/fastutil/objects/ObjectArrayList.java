@@ -1,0 +1,1 @@
+package it.unimi.dsi.fastutil.objects; public class ObjectArrayList<K> extends java.util.ArrayList<K> implements ObjectCollection<K> { public ObjectArrayList(){} public ObjectArrayList(int c){super(c);} public ObjectArrayList(java.util.Collection<? extends K> c){super(c);} }

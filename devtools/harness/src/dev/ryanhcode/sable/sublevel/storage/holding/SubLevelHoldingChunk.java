@@ -1,0 +1,4 @@
+package dev.ryanhcode.sable.sublevel.storage.holding; public class SubLevelHoldingChunk implements dev.sableguard.mixin.accessor.HoldingChunkAccessor {
+ final net.minecraft.world.level.ChunkPos pos; public final it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<java.util.UUID, dev.ryanhcode.sable.sublevel.storage.HoldingSubLevel> held=new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>(); public final java.util.List<SavedSubLevelPointer> pointers=new java.util.ArrayList<>();
+ public SubLevelHoldingChunk(net.minecraft.world.level.ChunkPos p){pos=p;} public net.minecraft.world.level.ChunkPos getChunkPos(){return pos;} public java.util.List<SavedSubLevelPointer> getSubLevelPointers(){return pointers;} public void markKeepLoaded(){}
+ public it.unimi.dsi.fastutil.objects.Object2ObjectMap<java.util.UUID, dev.ryanhcode.sable.sublevel.storage.HoldingSubLevel> sableguard$held(){return held;} }

@@ -1,0 +1,1 @@
+package it.unimi.dsi.fastutil.objects; public class ObjectSetImpl<K> extends java.util.LinkedHashSet<K> implements ObjectSet<K> { public ObjectSetImpl(){} public ObjectSetImpl(java.util.Collection<K> c){super(c);} }

@@ -1,0 +1,5 @@
+package dev.ryanhcode.sable.sublevel.storage.serialization; public final class SubLevelData implements dev.sableguard.mixin.accessor.SubLevelDataAccessor {
+ final java.util.UUID uuid; final dev.ryanhcode.sable.companion.math.BoundingBox3d bounds; final dev.ryanhcode.sable.companion.math.Pose3d pose=new dev.ryanhcode.sable.companion.math.Pose3d(); java.util.List<java.util.UUID> relations; final net.minecraft.nbt.CompoundTag tag=new net.minecraft.nbt.CompoundTag();
+ public SubLevelData(java.util.UUID u, dev.ryanhcode.sable.companion.math.BoundingBox3d b, java.util.List<java.util.UUID> r){uuid=u;bounds=b;relations=r;}
+ public java.util.UUID uuid(){return uuid;} public dev.ryanhcode.sable.companion.math.BoundingBox3d bounds(){return bounds;} public dev.ryanhcode.sable.companion.math.Pose3d pose(){return pose;} public java.util.List<java.util.UUID> dependencies(){return relations;} public net.minecraft.nbt.CompoundTag fullTag(){return tag;}
+ public void sableguard$setRelations(java.util.List<java.util.UUID> r){relations=r;} }

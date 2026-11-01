@@ -1,0 +1,2 @@
+package it.unimi.dsi.fastutil.objects; public class Object2ObjectOpenHashMap<K,V> extends java.util.LinkedHashMap<K,V> implements Object2ObjectMap<K,V> {
+ public ObjectSet<Object2ObjectMap.Entry<K,V>> object2ObjectEntrySet(){ ObjectSetImpl<Object2ObjectMap.Entry<K,V>> s=new ObjectSetImpl<>(); for (var e: entrySet()) { final K k=e.getKey(); final V v=e.getValue(); s.add(new Object2ObjectMap.Entry<K,V>(){ public K getKey(){return k;} public V getValue(){return v;} public V setValue(V x){throw new UnsupportedOperationException();} }); } return s; } }

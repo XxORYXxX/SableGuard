@@ -1,0 +1,1 @@
+package net.minecraft.commands.arguments; public class UuidArgument implements com.mojang.brigadier.arguments.ArgumentType<java.util.UUID> { public static UuidArgument uuid(){return null;} public static java.util.UUID getUuid(com.mojang.brigadier.context.CommandContext<net.minecraft.commands.CommandSourceStack> c, String n){return null;} }

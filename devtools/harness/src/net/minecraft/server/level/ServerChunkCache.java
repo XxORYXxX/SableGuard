@@ -1,0 +1,1 @@
+package net.minecraft.server.level; public class ServerChunkCache { public final java.util.List<net.minecraft.world.level.ChunkPos> tickets=new java.util.ArrayList<>(); public <T> void addRegionTicket(TicketType<T> type, net.minecraft.world.level.ChunkPos pos, int distance, T value){tickets.add(pos);} }

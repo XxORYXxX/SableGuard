@@ -1,0 +1,23 @@
+{
+  "required": false,
+  "minVersion": "0.8.5",
+  "package": "dev.sableguard.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "dev.sableguard.SableVersionGate",
+  "mixins": [
+    "compat.carryon.PlacementHandlerMixin",
+    "compat.cbc.DetectingProjectileMixin",
+    "compat.cbc.ParticleHelperMixin",
+    "compat.ctt.CreateThreadedTrainsMixin",
+    "compat.scguns.EnemyTurretBlockEntityMixin",
+    "compat.scguns.S2CMessageTurretVisualSyncAccessor",
+    "compat.scguns.ShockCoilBlockEntityMixin",
+    "compat.scguns.TurretBlockEntityMixin"
+  ],
+  "client": [
+    "compat.scguns.S2CMessageTurretVisualSyncMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

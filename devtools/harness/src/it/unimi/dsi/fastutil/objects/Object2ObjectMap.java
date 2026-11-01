@@ -1,0 +1,1 @@
+package it.unimi.dsi.fastutil.objects; public interface Object2ObjectMap<K,V> extends java.util.Map<K,V> { interface Entry<K,V> extends java.util.Map.Entry<K,V> {} ObjectSet<Entry<K,V>> object2ObjectEntrySet(); }

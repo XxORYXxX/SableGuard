@@ -1,0 +1,1 @@
+package dev.ryanhcode.sable.sublevel; public class ServerSubLevel extends SubLevel implements dev.ryanhcode.sable.api.physics.PhysicsPipelineBody { public dev.ryanhcode.sable.sublevel.storage.holding.GlobalSavedSubLevelPointer ptr; public dev.ryanhcode.sable.sublevel.storage.holding.GlobalSavedSubLevelPointer getLastSerializationPointer(){return ptr;} }

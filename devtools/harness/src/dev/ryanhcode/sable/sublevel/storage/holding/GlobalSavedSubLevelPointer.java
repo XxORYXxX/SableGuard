@@ -1,0 +1,1 @@
+package dev.ryanhcode.sable.sublevel.storage.holding; public record GlobalSavedSubLevelPointer(net.minecraft.world.level.ChunkPos chunkPos, short storageIndex, short subLevelIndex) { public SavedSubLevelPointer local(){return new SavedSubLevelPointer(storageIndex, subLevelIndex);} }

@@ -1,0 +1,1 @@
+package net.neoforged.neoforge.event; public class RegisterCommandsEvent extends net.neoforged.bus.api.Event { public com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.CommandSourceStack> getDispatcher(){return null;} }

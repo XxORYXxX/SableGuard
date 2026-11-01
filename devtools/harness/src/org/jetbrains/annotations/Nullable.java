@@ -1,0 +1,1 @@
+package org.jetbrains.annotations; import java.lang.annotation.*; @Target({ElementType.METHOD,ElementType.FIELD,ElementType.PARAMETER,ElementType.LOCAL_VARIABLE,ElementType.TYPE_USE}) public @interface Nullable {}

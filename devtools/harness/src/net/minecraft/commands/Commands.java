@@ -1,0 +1,1 @@
+package net.minecraft.commands; public class Commands { public static com.mojang.brigadier.builder.LiteralArgumentBuilder<CommandSourceStack> literal(String s){return null;} public static <T> com.mojang.brigadier.builder.RequiredArgumentBuilder<CommandSourceStack,T> argument(String n, com.mojang.brigadier.arguments.ArgumentType<T> t){return null;} }

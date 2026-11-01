@@ -1,0 +1,3 @@
+package it.unimi.dsi.fastutil.longs; public class LongOpenHashSet extends java.util.AbstractSet<Long> implements LongSet { final java.util.LinkedHashSet<Long> s=new java.util.LinkedHashSet<>();
+ public LongOpenHashSet(){} public boolean add(long k){return s.add(k);} public boolean add(Long k){return s.add(k);} public int size(){return s.size();} public boolean contains(Object o){return s.contains(o);}
+ public LongIterator iterator(){ final java.util.Iterator<Long> it=s.iterator(); return new LongIterator(){ public boolean hasNext(){return it.hasNext();} public Long next(){return it.next();} public long nextLong(){return it.next();} }; } }
