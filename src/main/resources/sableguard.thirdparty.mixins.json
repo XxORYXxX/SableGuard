@@ -15,6 +15,7 @@
     "compat.scguns.TurretBlockEntityMixin"
   ],
   "client": [
+    "compat.airwars.ClientChunkCacheMixin",
     "compat.scguns.S2CMessageTurretVisualSyncMixin"
   ],
   "injectors": {

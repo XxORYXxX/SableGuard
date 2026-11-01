@@ -8,7 +8,7 @@ Escrito contra **Sable 2.0.6** (`ad8b4d3`), **Create 6.0.10** y **Create Aeronau
 
 ## Qué incluye
 
-54 arreglos, cada uno se activa o desactiva por separado (`/sableguard fix …` o `config/sableguard/fixes.json`).
+55 arreglos, cada uno se activa o desactiva por separado (`/sableguard fix …` o `config/sableguard/fixes.json`).
 
 | Categoría | Por defecto | Qué es |
 |---|---|---|
@@ -52,6 +52,10 @@ Escrito contra **Sable 2.0.6** (`ad8b4d3`), **Create 6.0.10** y **Create Aeronau
 
 - `cbc-rangefinder-sublevel-fix`: misma idea que **CBC Sable Rangefinder Fix** (`cbc_sable_fix`, de Yarik), escrita de nuevo. CBC Ballistics simula un proyectil virtual (`DetectingProjectile`) para el rangefinder **y** para las soluciones de tiro de la calculadora balística. Si impacta en un bloque de un sub-level, guarda coordenadas del plot (20-30 millones de bloques): la calculadora se queda calculando un tiro imposible y la radio envía objetivos absurdos. SableGuard guarda en su lugar el **punto exacto** del impacto en el mundo; el original usaba el centro de la caja del barco. La lógica de bloque de vanilla sigue viendo el bloque real del sub-level.
 - `cbc-particle-cap`: máximo 200 partículas por línea y 100 por círculo. El original cortaba las líneas a 50 bloques; aquí se espacian las partículas y la línea conserva su longitud. Las formas absurdas (más de un millón de partículas) se omiten.
+
+### Compatibilidad propia de SableGuard
+
+- `airwars-plot-chunks` (cliente, activado si está **Create: The Air Wars**): Air Wars se queda cualquier chunk que llegue fuera de tu distancia de visión, para sus cámaras remotas (`ctaw$acceptRemoteChunk` al inicio de `ClientChunkCache.replaceWithPacketData`), y cancela el método. Los chunks del plot de Sable siempre están lejos, así que nunca llegaban a Sable: la estructura ensamblada era invisible, no se podía romper ni poner bloques en ella y `/sable remove` la quitaba igual (en el servidor sí existía). SableGuard le dice a Air Wars que los chunks de plot están "en rango", y Air Wars los devuelve al camino normal; sus cámaras siguen funcionando con el resto. Diagnóstico: `/sableguard track` mostraba el chunk de plot cargado en el servidor y `/sableguardc sublevels`, 0 en el cliente.
 
 ### Desactivar mods duplicados (`disable-duplicate-mods`, activado)
 
@@ -151,7 +155,7 @@ El jar queda en `build/libs/sableguard-neoforge-1.21.1-0.3.0.jar`.
 
 - Las mixins solo se aplican con Sable `2.0.6`. En otra versión el mod no hace nada y lo dice en el log y en `/sableguard status`. Para forzarlo: `config/sableguard-mixins.properties` → `allowUntestedSableVersions=true` (solo con backup).
 - Si tienes instalado **SableCat/FuckSable, Sable Fix Mod o Sable Chunk Guard**, SableGuard desactiva sus propias versiones de esos arreglos para no aplicarlos dos veces. Desde la 0.3.0 los desactiva él mismo (ver arriba). Los mod IDs de SableCat (`sablecat`), FuckSable (`fucksable`), Sable Fix Mod (`sable_fix_mod`), Holding Chunk Fixer (`sablesublevelholdingchunkfix`) y CBC Sable Rangefinder Fix (`cbc_sable_fix`) están verificados; Sable Chunk Guard se reconoce también por el nombre del jar (`sable-chunk-guard-*`) o su nombre visible, porque su ID no es público.
-- Los mixins de mods cuyo código no pude revisar (Create ThreadedTrains, Scorched Guns) o que cambian a menudo (CarryOn) están en una configuración **no obligatoria**: si ese mod cambió, ese mixin se salta con un error en el log en lugar de impedir que arranque el juego.
+- Los mixins de mods cuyo código no pude revisar (Create ThreadedTrains, Scorched Guns, Create: The Air Wars) o que cambian a menudo (CarryOn) están en una configuración **no obligatoria**: si ese mod cambió, ese mixin se salta con un error en el log en lugar de impedir que arranque el juego.
 - Todos los borrados (`purge`, `forcepurge`, `rescue purge`) son explícitos; ningún arreglo borra datos por su cuenta.
 
 ### ScalableLux
@@ -176,12 +180,16 @@ Hecho (en el entorno donde se escribió, sin Minecraft):
 - Pruebas de la detección de mods duplicados (los de tu pack, y que CBC Ballistics y otros addons de Sable no se tocan).
 - Pruebas del registro de arreglos (JSON, defaults, behaviour apagados, opciones inválidas, archivo corrupto) y de la escritura de `fml.toml` con NightConfig real. Esta última encontró un bug real: NightConfig guarda en segundo plano por defecto y se perdía la escritura; corregido.
 
+Hecho contra Minecraft real (1 nov 2026):
+- Compila contra NeoForge 21.1.235 y los jars reales de Sable, Create, Aeronautics y CBC Ballistics.
+- Servidor de desarrollo: 36 mixins aplicados sin errores; sub-levels ensamblados, guardados, descargados y recargados tras reiniciar.
+- Copia del modpack completo (NeoForge 21.1.262, 505 mods): carga el mundo sin errores de mixins y desactiva los 4 mods duplicados.
+
 Pendiente:
-- Compilar contra Minecraft/NeoForge reales y arrancar el juego. Primero en un **mundo de prueba o con backup**.
 - Los mixins de Scorched Guns son un port fiel de SableCat, que compilaba contra Scorched Guns; yo no tuve su código para revisarlo.
 - `keep-sublevels-near-players` y `death-grace` solo están probados en compilación; su lógica de proximidad no tiene escenarios simulados todavía.
 - El script de renombrado diferido en Windows.
 
 ## Licencia
 
-El código de SableGuard es MIT. Incluye código adaptado de SableCat, FuckSable y Sable Fix Mod (MIT); los avisos están en `THIRD_PARTY_NOTICES.md` y viajan dentro del jar. Sable es © RyanHCode bajo PolyForm Shield 1.0.0; SableGuard lo parchea en tiempo de carga y no redistribuye su código.
+El código de SableGuard es GPL-3.0. Incluye código adaptado de SableCat, FuckSable y Sable Fix Mod (MIT); los avisos están en `THIRD_PARTY_NOTICES.md` y viajan dentro del jar. Sable es © RyanHCode bajo PolyForm Shield 1.0.0; SableGuard lo parchea en tiempo de carga y no redistribuye su código.

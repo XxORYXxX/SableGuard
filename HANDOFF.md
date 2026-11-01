@@ -35,7 +35,7 @@ Resumen de lo hecho en la conversación de Claude en la nube, para seguir en Cla
    - Que aparece `[SableGuard] Sable 2.0.6 detected`.
    - Que los mixins aplican sin errores.
    - Que `disable-duplicate-mods` renombró `sable_fix_mod-1.1.0`, `sable-chunk-guard-1.0.0`, `sablesublevelholdingchunkfix-1.5.3` y `cbc-sable-fix-1.0.3`. Reiniciar y confirmar que no vuelven.
-3. **Bug del usuario (sin resolver):** con el assembler de Aeronautics, la estructura desaparece, no se puede romper ni poner bloques ahí, y `/sable remove` con rango la quita.
+3. **[RESUELTO 1 nov 2026 con `airwars-plot-chunks`]** Causa: Create: The Air Wars (`hi.mixin.camera.ClientChunkCacheMixin.ctaw$acceptRemoteChunk`, HEAD de `ClientChunkCache.replaceWithPacketData`) se quedaba todo chunk fuera del radio de visión para sus cámaras y cancelaba, así que los chunks de plot nunca llegaban a Sable (servidor: 1 chunk de plot cargado; cliente: 0). Con el arreglo, en la copia del pack el cliente marca `plot chunks loaded 1`. **Bug del usuario (historial):** con el assembler de Aeronautics, la estructura desaparece, no se puede romper ni poner bloques ahí, y `/sable remove` con rango la quita.
    - El log del 1 nov (instancia Prism "Mega Tech Pack", mundo "Test") muestra que el servidor creó bien el sub-level en (145.5, 90.8, 299.5), sin errores.
    - Que no se pueda romper indica que **el cliente probablemente nunca recibió el sub-level** (red o seguimiento), no un fallo de render.
    - Siguiente paso: reproducir y ejecutar `/sableguard track` y `/sableguardc sublevels`:

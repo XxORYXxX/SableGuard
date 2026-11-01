@@ -52,7 +52,8 @@ public final class SableVersionGate implements IMixinConfigPlugin {
             "compat.effortless.", "effortless",
             "compat.scalablelux.", "scalablelux",
             "compat.scguns.", "scguns",
-            "compat.cbc.", "cbc_ballistics"
+            "compat.cbc.", "cbc_ballistics",
+            "compat.airwars.", "create_the_air_wars"
     );
 
     /** Original mod ids → the SableGuard mixins (simple names relative to the mixin package) that duplicate them. */

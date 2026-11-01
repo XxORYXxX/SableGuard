@@ -152,6 +152,9 @@ public final class Fixes {
     public static final Fix EFFORTLESS_PARTICLES = FixRegistry.register("effortless-particle-fix", COMPAT, true, Set.of("effortless"), CAT,
             "Client: no block-break particles for unloaded chunks (Effortless Building + Sable crash).");
 
+    public static final Fix AIRWARS_PLOT_CHUNKS = FixRegistry.register("airwars-plot-chunks", COMPAT, true, Set.of("create_the_air_wars"), SG,
+            "Client: Create: The Air Wars no longer captures Sable plot chunks for its remote cameras (assembled sub-levels were invisible and could not be edited).");
+
     public static final Fix SCALABLELUX_COMPAT = FixRegistry.register("scalablelux-compat", COMPAT, true, Set.of("scalablelux"), CAT,
             "Correct sub-level lighting when ScalableLux is installed. Needs scalablelux-incompat-bypass.");
 
