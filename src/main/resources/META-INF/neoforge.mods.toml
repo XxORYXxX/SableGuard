@@ -14,7 +14,7 @@ description='''${mod_description}'''
 [[mixins]]
 config="${mod_id}.mixins.json"
 
-# Targets in mods whose source SableGuard could not check (Create ThreadedTrains, Scorched Guns, Create: The Air Wars: checked against its 5.00 bytecode only, CBC Ballistics: checked against its 1.3.0a bytecode only) or whose internals change often (CarryOn).
+# Targets in mods whose source SableGuard could not check (Create ThreadedTrains, Scorched Guns, Create: The Air Wars: checked against its 5.00 bytecode only, Sable Dynamic Lights: checked against its 2.0.1 bytecode only, CBC Ballistics: checked against its 1.3.0a bytecode only) or whose internals change often (CarryOn).
 # Not required: if one of those mods changed, the affected mixin is skipped with an error in the log.
 [[mixins]]
 config="${mod_id}.thirdparty.mixins.json"

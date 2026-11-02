@@ -43,17 +43,18 @@ public final class SableVersionGate implements IMixinConfigPlugin {
     private static final String ALLOW_UNTESTED_KEY = "allowUntestedSableVersions";
 
     /** Mixin sub-package → mod that must be installed. */
-    private static final Map<String, String> REQUIRED_BY_PACKAGE = Map.of(
-            "compat.create.", "create",
-            "compat.simulated.", "simulated",
-            "compat.aeronautics.", "aeronautics",
-            "compat.ctt.", "createthreadedtrains",
-            "compat.carryon.", "carryon",
-            "compat.effortless.", "effortless",
-            "compat.scalablelux.", "scalablelux",
-            "compat.scguns.", "scguns",
-            "compat.cbc.", "cbc_ballistics",
-            "compat.airwars.", "create_the_air_wars"
+    private static final Map<String, String> REQUIRED_BY_PACKAGE = Map.ofEntries(
+            Map.entry("compat.create.", "create"),
+            Map.entry("compat.simulated.", "simulated"),
+            Map.entry("compat.aeronautics.", "aeronautics"),
+            Map.entry("compat.ctt.", "createthreadedtrains"),
+            Map.entry("compat.carryon.", "carryon"),
+            Map.entry("compat.effortless.", "effortless"),
+            Map.entry("compat.scalablelux.", "scalablelux"),
+            Map.entry("compat.scguns.", "scguns"),
+            Map.entry("compat.cbc.", "cbc_ballistics"),
+            Map.entry("compat.airwars.", "create_the_air_wars"),
+            Map.entry("compat.sabledynlights.", "sabledynlights")
     );
 
     /** Original mod ids → the SableGuard mixins (simple names relative to the mixin package) that duplicate them. */

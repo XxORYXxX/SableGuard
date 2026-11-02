@@ -14,6 +14,7 @@ public final class SableGuardStats {
     public static long velocitiesSanitized;
     public static long duplicateLoadsSkipped;
     public static long heatmapTicksSkipped;
+    public static long splitsStoppedParentRemoved;
     public static long nullHoldingChunkSaves;
     public static long storageIndexBuilds;
 
@@ -31,6 +32,7 @@ public final class SableGuardStats {
         velocitiesSanitized = 0;
         duplicateLoadsSkipped = 0;
         heatmapTicksSkipped = 0;
+        splitsStoppedParentRemoved = 0;
         nullHoldingChunkSaves = 0;
         storageIndexBuilds = 0;
     }

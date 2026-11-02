@@ -94,6 +94,7 @@ public final class SableGuardCommands {
         source.sendSuccess(() -> line("Velocities sanitized", Long.toString(SableGuardStats.velocitiesSanitized)), false);
         source.sendSuccess(() -> line("Duplicate loads skipped", Long.toString(SableGuardStats.duplicateLoadsSkipped)), false);
         source.sendSuccess(() -> line("Split crashes avoided (ticks)", Long.toString(SableGuardStats.heatmapTicksSkipped)), false);
+        source.sendSuccess(() -> line("Splits stopped (parent removed mid-split)", Long.toString(SableGuardStats.splitsStoppedParentRemoved)), false);
         source.sendSuccess(() -> line("Save aborts avoided", Long.toString(SableGuardStats.nullHoldingChunkSaves)), false);
 
         final GuardState state = ((GuardStateHolder) (Object) map).sableguard$getState();

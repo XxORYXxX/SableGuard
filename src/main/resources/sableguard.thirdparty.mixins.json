@@ -16,6 +16,7 @@
   ],
   "client": [
     "compat.airwars.ClientChunkCacheMixin",
+    "compat.sabledynlights.VirtualLightManagerMixin",
     "compat.scguns.S2CMessageTurretVisualSyncMixin"
   ],
   "injectors": {

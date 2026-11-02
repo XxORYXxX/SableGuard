@@ -49,6 +49,9 @@ public final class Fixes {
     public static final Fix HEATMAP_GUARD = FixRegistry.register("heatmap-guard", CRASH_GUARD, true, NONE, SG,
             "Skips block-split processing of sub-levels that are already removed (prevents the 'assembly attempted inside plot of already removed sub-level' crash).");
 
+    public static final Fix SPLIT_PARENT_GUARD = FixRegistry.register("split-parent-guard", CRASH_GUARD, true, NONE, SG,
+            "Stops a block split mid-way when moving one island out left the parent sub-level with no valid mass and Sable removed it, instead of crashing on the next island ('assembly attempted inside plot of already removed sub-level').");
+
     public static final Fix SAVE_GUARDS = FixRegistry.register("save-guards", STORAGE, true, NONE, SG,
             "Save hardening: iterate a snapshot of holding chunks, survive a null holding chunk, never load a second copy of a sub-level, forget held copies of deleted sub-levels.");
 
@@ -154,6 +157,9 @@ public final class Fixes {
 
     public static final Fix AIRWARS_PLOT_CHUNKS = FixRegistry.register("airwars-plot-chunks", COMPAT, true, Set.of("create_the_air_wars"), SG,
             "Client: Create: The Air Wars no longer captures Sable plot chunks for its remote cameras (assembled sub-levels were invisible and could not be edited).");
+
+    public static final Fix SABLEDYNLIGHTS_THREAD_GUARD = FixRegistry.register("sabledynlights-thread-guard", COMPAT, true, Set.of("sabledynlights"), SG,
+            "Client: Sable Dynamic Lights only adds its virtual light on the render thread. In singleplayer the integrated server's light engines read its client-only maps while the client changes them (ConcurrentModificationException while ticking the world).");
 
     public static final Fix SCALABLELUX_COMPAT = FixRegistry.register("scalablelux-compat", COMPAT, true, Set.of("scalablelux"), CAT,
             "Correct sub-level lighting when ScalableLux is installed. Needs scalablelux-incompat-bypass.");
