@@ -54,7 +54,8 @@ public final class SableVersionGate implements IMixinConfigPlugin {
             Map.entry("compat.scguns.", "scguns"),
             Map.entry("compat.cbc.", "cbc_ballistics"),
             Map.entry("compat.airwars.", "create_the_air_wars"),
-            Map.entry("compat.sabledynlights.", "sabledynlights")
+            Map.entry("compat.sabledynlights.", "sabledynlights"),
+            Map.entry("compat.heavyblocks.", "sable_heavy_blocks")
     );
 
     /** Original mod ids → the SableGuard mixins (simple names relative to the mixin package) that duplicate them. */

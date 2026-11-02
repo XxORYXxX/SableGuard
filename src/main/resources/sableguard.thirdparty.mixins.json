@@ -9,6 +9,7 @@
     "compat.cbc.DetectingProjectileMixin",
     "compat.cbc.ParticleHelperMixin",
     "compat.ctt.CreateThreadedTrainsMixin",
+    "compat.heavyblocks.ModInteractionsMixin",
     "compat.scguns.EnemyTurretBlockEntityMixin",
     "compat.scguns.S2CMessageTurretVisualSyncAccessor",
     "compat.scguns.ShockCoilBlockEntityMixin",

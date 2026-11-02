@@ -8,7 +8,7 @@ Escrito contra **Sable 2.0.6** (`ad8b4d3`), **Create 6.0.10** y **Create Aeronau
 
 ## Qué incluye
 
-57 arreglos, cada uno se activa o desactiva por separado (`/sableguard fix …` o `config/sableguard/fixes.json`).
+58 arreglos, cada uno se activa o desactiva por separado (`/sableguard fix …` o `config/sableguard/fixes.json`).
 
 | Categoría | Por defecto | Qué es |
 |---|---|---|
@@ -58,6 +58,7 @@ Escrito contra **Sable 2.0.6** (`ad8b4d3`), **Create 6.0.10** y **Create Aeronau
 
 - `airwars-plot-chunks` (cliente, activado si está **Create: The Air Wars**): Air Wars se queda cualquier chunk que llegue fuera de tu distancia de visión, para sus cámaras remotas (`ctaw$acceptRemoteChunk` al inicio de `ClientChunkCache.replaceWithPacketData`), y cancela el método. Los chunks del plot de Sable siempre están lejos, así que nunca llegaban a Sable: la estructura ensamblada era invisible, no se podía romper ni poner bloques en ella y `/sable remove` la quitaba igual (en el servidor sí existía). SableGuard le dice a Air Wars que los chunks de plot están "en rango", y Air Wars los devuelve al camino normal; sus cámaras siguen funcionando con el resto. Diagnóstico: `/sableguard track` mostraba el chunk de plot cargado en el servidor y `/sableguardc sublevels`, 0 en el cliente.
 - `sabledynlights-thread-guard` (cliente, activado si está **Sable Dynamic Lights**): su mixin mete `VirtualLightManager.getVirtualEmission` al inicio de `BlockLightEngine.getEmission` de **todos** los motores de luz, no solo los del cliente. Sus mapas de luz son `HashMap` estáticos normales que el tick del cliente reescribe en el hilo de render; en un mundo de un jugador, el servidor integrado (por ejemplo `ServerLevelPlot.tick` de Sable) los recorre a la vez desde el hilo del servidor y el mundo cae con `ConcurrentModificationException`. Además metía luz dinámica (que solo es del cliente) en la luz del servidor. SableGuard hace que fuera del hilo de render la emisión virtual sea 0: el servidor ve la luz vanilla y el cliente sigue con sus luces dinámicas. Revisado contra el bytecode de la 2.0.1 (Apache 2.0); no se copió código.
+- `heavy-blocks-natural-guard` (**behaviour, apagado**; solo actúa si está **Sable Heavy Blocks**): ese mod convierte en sub-level que cae todo bloque con masa de Sable ≥ `min_mass_to_break` (4,0 por defecto) sin soporte a menos de 20 bloques, en cualquier actualización de bloques vecinos (agua o lava que fluye, minar...). Los bloques de mena en bruto (`#c:storage_blocks`) pesan justo 4,0, así que las cuevas arrancaban trozos enteros de veta con deepslate y lava: decenas de cuerpos físicos en el fondo del mundo, splits que crasheaban y servidor a ~1 s por tick. Con este arreglo el terreno natural nunca dispara Heavy Blocks: menas, bloques de mena en bruto (también los de mods, por el prefijo `raw_`) y piedra base. Se amplía con un datapack en el tag `#sableguard:heavy_blocks_natural`. Contra: un bloque de mena en bruto que pongas tú tampoco caerá. Lo que ya se arrancó antes no vuelve solo. Activar: `/sableguard fix enable heavy-blocks-natural-guard`.
 
 ### Desactivar mods duplicados (`disable-duplicate-mods`, activado)
 
@@ -157,7 +158,7 @@ El jar queda en `build/libs/sableguard-neoforge-1.21.1-0.3.0.jar`.
 
 - Las mixins solo se aplican con Sable `2.0.6`. En otra versión el mod no hace nada y lo dice en el log y en `/sableguard status`. Para forzarlo: `config/sableguard-mixins.properties` → `allowUntestedSableVersions=true` (solo con backup).
 - Si tienes instalado **SableCat/FuckSable, Sable Fix Mod o Sable Chunk Guard**, SableGuard desactiva sus propias versiones de esos arreglos para no aplicarlos dos veces. Desde la 0.3.0 los desactiva él mismo (ver arriba). Los mod IDs de SableCat (`sablecat`), FuckSable (`fucksable`), Sable Fix Mod (`sable_fix_mod`), Holding Chunk Fixer (`sablesublevelholdingchunkfix`) y CBC Sable Rangefinder Fix (`cbc_sable_fix`) están verificados; Sable Chunk Guard se reconoce también por el nombre del jar (`sable-chunk-guard-*`) o su nombre visible, porque su ID no es público.
-- Los mixins de mods cuyo código no pude revisar (Create ThreadedTrains, Scorched Guns, Create: The Air Wars, Sable Dynamic Lights) o que cambian a menudo (CarryOn) están en una configuración **no obligatoria**: si ese mod cambió, ese mixin se salta con un error en el log en lugar de impedir que arranque el juego.
+- Los mixins de mods cuyo código no pude revisar (Create ThreadedTrains, Scorched Guns, Create: The Air Wars, Sable Dynamic Lights, Sable Heavy Blocks) o que cambian a menudo (CarryOn) están en una configuración **no obligatoria**: si ese mod cambió, ese mixin se salta con un error en el log en lugar de impedir que arranque el juego.
 - Todos los borrados (`purge`, `forcepurge`, `rescue purge`) son explícitos; ningún arreglo borra datos por su cuenta.
 
 ### ScalableLux

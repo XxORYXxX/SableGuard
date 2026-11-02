@@ -161,6 +161,9 @@ public final class Fixes {
     public static final Fix SABLEDYNLIGHTS_THREAD_GUARD = FixRegistry.register("sabledynlights-thread-guard", COMPAT, true, Set.of("sabledynlights"), SG,
             "Client: Sable Dynamic Lights only adds its virtual light on the render thread. In singleplayer the integrated server's light engines read its client-only maps while the client changes them (ConcurrentModificationException while ticking the world).");
 
+    public static final Fix HEAVY_BLOCKS_NATURAL_GUARD = FixRegistry.register("heavy-blocks-natural-guard", BEHAVIOR, false, Set.of("sable_heavy_blocks"), SG,
+            "Sable Heavy Blocks never turns natural terrain (ores, raw ore blocks, base stone; tag #sableguard:heavy_blocks_natural) into falling sub-levels. Raw ore blocks weigh exactly its default threshold, so cave updates ripped ore veins out of the world.");
+
     public static final Fix SCALABLELUX_COMPAT = FixRegistry.register("scalablelux-compat", COMPAT, true, Set.of("scalablelux"), CAT,
             "Correct sub-level lighting when ScalableLux is installed. Needs scalablelux-incompat-bypass.");
 
